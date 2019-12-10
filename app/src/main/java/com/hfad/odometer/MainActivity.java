@@ -8,11 +8,12 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import java.util.Locale;
 
@@ -65,13 +66,13 @@ public class MainActivity extends Activity {
             }
         };
 
-        locManager = (LocationManager) getSystemService (Context.LOCATION_SERVICE);
+        locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     }
 
     private void trackDistance() {
         if (ContextCompat.checkSelfPermission(this, PERMISSION_STRING)
                 != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[] {PERMISSION_STRING}, PERMISSION_REQUEST_CODE);
+            ActivityCompat.requestPermissions(this, new String[]{PERMISSION_STRING}, PERMISSION_REQUEST_CODE);
             return;
         }
 
