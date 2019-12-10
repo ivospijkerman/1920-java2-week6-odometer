@@ -43,27 +43,12 @@ public class MainActivity extends Activity {
     }
 
     private void setLocationListener() {
-        listener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                if (lastLocation == null) {
-                    lastLocation = location;
-                }
-                distanceInMeters += location.distanceTo(lastLocation);
+        listener = (LocationChangeListener) location -> {
+            if (lastLocation == null) {
                 lastLocation = location;
             }
-
-            @Override
-            public void onProviderDisabled(String arg0) {
-            }
-
-            @Override
-            public void onProviderEnabled(String arg0) {
-            }
-
-            @Override
-            public void onStatusChanged(String arg0, int arg1, Bundle bundle) {
-            }
+            distanceInMeters += location.distanceTo(lastLocation);
+            lastLocation = location;
         };
 
         locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
