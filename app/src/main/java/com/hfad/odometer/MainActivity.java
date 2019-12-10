@@ -17,7 +17,7 @@ import androidx.core.content.ContextCompat;
 
 import java.util.Locale;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements LocationListener{
 
     private static final String TAG = "ODO APP";
     private final int PERMISSION_REQUEST_CODE = 698;
@@ -43,28 +43,7 @@ public class MainActivity extends Activity {
     }
 
     private void setLocationListener() {
-        listener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                if (lastLocation == null) {
-                    lastLocation = location;
-                }
-                distanceInMeters += location.distanceTo(lastLocation);
-                lastLocation = location;
-            }
-
-            @Override
-            public void onProviderDisabled(String arg0) {
-            }
-
-            @Override
-            public void onProviderEnabled(String arg0) {
-            }
-
-            @Override
-            public void onStatusChanged(String arg0, int arg1, Bundle bundle) {
-            }
-        };
+        listener = this;
 
         locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     }
@@ -124,5 +103,29 @@ public class MainActivity extends Activity {
 
     private double getDistanceInMiles() {
         return distanceInMeters / 1609.344;
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        if (lastLocation == null) {
+            lastLocation = location;
+        }
+        distanceInMeters += location.distanceTo(lastLocation);
+        lastLocation = location;
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
     }
 }
